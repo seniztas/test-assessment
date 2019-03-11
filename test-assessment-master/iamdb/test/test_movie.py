@@ -44,3 +44,8 @@ class TestMovie(object):
     def test_get_movie_with_null_id(self):
         status_code, data = get_api('movies', '')
         assert status_code == 200
+    
+    #test cases for DELETE#
+    def test_delete_movie_with_invalid_id(self):
+        status_code, data = delete_api('movies', 'b9f2d28c-57dc-4381-a752-ac36611ab51b')
+        assert status_code == 404, 'No persons found'
