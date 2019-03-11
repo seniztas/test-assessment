@@ -29,6 +29,8 @@ class TestPerson(object):
         new_person = {'first_name': '', 'last_name': '', 'birth_year': 'test'}
         status_code, data = post_api('persons', new_person)
         assert status_code == 201
+        assert data['birth_year'] == 'test'
+        assert isinstance(data['id'], str)
 
     #test cases for GET#
     def test_get_person_with_valid_id(self):
