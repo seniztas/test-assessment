@@ -1,4 +1,4 @@
-from testhelpers import post_api, get_api, delete_api
+from testhelpers import post_api, get_api, delete_api, put_api
 
 class TestPerson(object):
     #test cases for POST#
@@ -42,7 +42,7 @@ class TestPerson(object):
 
     def test_get_person_with_invalid_id(self):
         status_code, data = get_api('persons', 'b9f2d28c-57dc-4381-a752-ac36611ab51b')
-        assert status_code == 404, 'No persons found'
+        assert status_code == 404
     
     def test_get_person_with_null_id(self):
         status_code, data = get_api('persons', '')
@@ -51,4 +51,15 @@ class TestPerson(object):
     #test cases for DELETE#
     def test_delete_person_with_invalid_id(self):
         status_code, data = delete_api('persons', 'b9f2d28c-57dc-4381-a752-ac36611ab51b')
-        assert status_code == 404, 'No persons found'
+        assert status_code == 404
+
+    #test cases for PUT#
+    def test_put_person_with_valid_id(self):
+        update_exist_person = {'first_name': 'Patrick', 'last_name': 'Stewart', 'birth_year': 1940}
+        status_code, data = put_api('persons', 'b636e887-7402-4eda-885f-549ea9792116',update_exist_person)
+        assert status_code == 200
+        assert data['first_name'] == 'Patrick'
+        assert data['last_name'] == 'Stewart'
+        assert data['birth_year'] == 1940
+        return_movie_data = {"first_name": "Charlize", "last_name": "Theron", "birth_year": 1975}
+        put_api('persons', 'b636e887-7402-4eda-885f-549ea9792116',return_movie_data)

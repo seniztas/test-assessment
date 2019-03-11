@@ -51,7 +51,7 @@ class TestMovie(object):
         assert status_code == 404
 
     #test cases for PUT#
-    def test_put_movie_with_invalid_id(self):
+    def test_put_movie_with_valid_id(self):
         update_exist_movie = {'title': 'Captan Marvel', 'year': 2019}
         status_code, data = put_api('movies', 'e6068a8f-fb38-49b5-a1a9-2e1222a2bdce',update_exist_movie)
         assert status_code == 200
